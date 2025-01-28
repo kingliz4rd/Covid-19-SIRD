@@ -31,11 +31,11 @@ st.markdown("""
     align-items: center;
 }
 
-/* Możesz dodać drobniejsze pismo dla opisu badania */
+
 .top-bar .subtitle {
-    font-size: 0.85rem; /* np. 85% normalnego rozmiaru */
-    color: #444;        /* ciemnoszary */
-    line-height: 1;     /* zbite w pionie */
+    font-size: 0.85rem;
+    color: #444;        
+    line-height: 1;     
 }
 
 .main-content {
@@ -55,14 +55,12 @@ footer {
 </style>
 
 <div class="top-bar">
-    <!-- Lewa część: tytuł + krótki opis badania -->
     <div>
         <strong>COVID-19 SIRD</strong><br>
         <span class="subtitle">Implementacja badania "On automatic calibration of the SIRD epidemiological model for COVID-19 data in Poland" + poszerzenie zakresu badań dla innych krajów.</span>
     </div>
-    <!-- Prawa część: link do repo -->
     <div>
-        <a href="https://github.com/twoj_link_do_repo" target="_blank">Kod źródłowy</a>
+        <a href="https://github.com/kingliz4rd/Covid-19-SIRD.git" target="_blank">Kod źródłowy</a>
     </div>
 </div>
 
@@ -74,17 +72,13 @@ import io, base64
 from pdf2image import convert_from_path
 
 def display_pdf_as_images(pdf_file, width=850):
-    # Konwertujemy PDF na listę obiektów PIL (poszczególne strony)
     images = convert_from_path(pdf_file)
 
-    # Dla każdej strony tworzymy <img> z wbudowaną treścią base64.
     for img in images:
-        # Zamieniamy obiekt PIL na bajty PNG w pamięci
         buf = io.BytesIO()
         img.save(buf, format="PNG")
         buf.seek(0)
         
-        # Kodujemy w base64 i wstawiamy do HTML-a
         img_b64 = base64.b64encode(buf.read()).decode("utf-8")
         st.markdown(
             f"""
